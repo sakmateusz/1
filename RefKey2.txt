@@ -1,0 +1,72 @@
+Sub RefKey2_Adjustment()
+'14/01/21
+'makro na podstawie numeru ksiegowania uzupelnia w SAP: RefKey2
+'Wykonano Sak.Mateusz@gmail.com
+
+Dim DocumentNumber As Variant
+Dim CompanyCode As Variant
+Dim FiscalYear As Variant
+Dim RefKey2 As Variant
+
+Range("F10:F1000").ClearContents
+
+'Zestaw zmiennych niezbednych do uruchomienia SAP
+Dim connection
+Dim Application1
+Dim session
+
+'makro uruchamia SAP
+If Not IsObject(Application1) Then
+   Set SapGuiAuto = GetObject("SAPGUI")
+   Set Application1 = SapGuiAuto.GetScriptingEngine
+End If
+If Not IsObject(connection) Then
+   Set connection = Application1.Children(0)
+End If
+If Not IsObject(session) Then
+   Set session = connection.Children(0)
+End If
+If IsObject(WScript) Then
+   WScript.ConnectObject session, "on"
+   WScript.ConnectObject Application, "on"
+End If
+'makro uruchomilo SAP i wykonuje w nim nastepujace polecenia
+
+session.findById("wnd[0]").maximize
+session.findById("wnd[0]/tbar[0]/okcd").Text = "/n"
+session.findById("wnd[0]").sendVKey 0
+
+    Dim rw As Integer
+    rw = 10
+ 
+    Do While Cells(rw, 2).Value <> ""
+            'mechanizm dopasowania danych w ksiegowaniu
+        sttime = Now()
+            
+            session.findById("wnd[0]").maximize
+            session.findById("wnd[0]/tbar[0]/okcd").Text = "/nfb02"
+            session.findById("wnd[0]").sendVKey 0
+            session.findById("wnd[0]/usr/txtRF05L-BELNR").Text = Cells(rw, 2).Value '"99000220"
+            session.findById("wnd[0]/usr/ctxtRF05L-BUKRS").Text = Cells(rw, 3).Value '"DE05"
+            session.findById("wnd[0]/usr/txtRF05L-GJAHR").Text = Cells(rw, 4).Value '"2021"
+            session.findById("wnd[0]/usr/txtRF05L-GJAHR").SetFocus
+            session.findById("wnd[0]/usr/txtRF05L-GJAHR").caretPosition = 4
+            session.findById("wnd[0]").sendVKey 0
+            session.findById("wnd[0]/usr/cntlCTRL_CONTAINERBSEG/shellcont/shell").currentCellColumn = "KTONR"
+            session.findById("wnd[0]/usr/cntlCTRL_CONTAINERBSEG/shellcont/shell").doubleClickCurrentCell
+            session.findById("wnd[0]/tbar[1]/btn[8]").press
+            session.findById("wnd[1]/usr/txtBSEG-XREF2").Text = Cells(rw, 5).Value '"DE"
+            session.findById("wnd[1]/usr/txtBSEG-XREF2").SetFocus
+            session.findById("wnd[1]/usr/txtBSEG-XREF2").caretPosition = 2
+            session.findById("wnd[1]/tbar[0]/btn[0]").press
+            session.findById("wnd[0]/tbar[0]/btn[11]").press
+            Cells(rw, 6).Value = "Adjusted"
+        edtime = Now()
+        Cells(rw, 7).Value = edtime - sttime
+
+    rw = rw + 1
+Loop
+MsgBox ("Completed")
+
+End Sub
+
