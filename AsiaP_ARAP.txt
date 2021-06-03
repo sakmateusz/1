@@ -1,0 +1,73 @@
+Sub AsiaP_ARAP()
+'18/02/20
+'Kod wywoluje wybrany przez uzytkownika plik .xlsm i z niego pobiera dane do zakladek AP i AR, nastepnie laczy je w jednej zakladce AP+AR.
+'Wykonano Sak.Mateusz@gmail.com
+
+Dim Source As Workbook
+Dim Goal As Workbook
+Dim FileToOpen As Variant
+Dim Question As Integer
+
+Question = MsgBox("Uwaga! Czy plik zostal poprawnie przygotowany do importu?" & vbNewLine & _
+"Przed importem danych nalezy uzupelnic zakladke Exchage rates " & _
+"w przeciwnym razie dane w koncowym raporcie nie beda aktualne." & vbNewLine & _
+"Jesli Exchage rates zostalo zaktualizowane nacisnij Yes." & vbNewLine _
+, vbQuestion + vbYesNo + vbDefaultButton2, "Czy plik zostal przygotowany do importu?")
+If Question = vbNo Then Exit Sub
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+FileToOpen = Application.GetOpenFilename(filefilter:="Excel Files(*.xlsm*), *xlsm*", _
+Title:="Otwórz plik zródlowy z danymi AP i AR do pobrania.")
+If FileToOpen = False Then Exit Sub
+If FileToOpen <> False Then
+Set Source = Application.Workbooks.Open(FileToOpen)
+End If
+Set Goal = Application.Workbooks("MEC GAS 2020.xlsm")
+
+'AR przenoszenie danych
+Goal.Sheets("AR").Cells.ClearContents
+Source.Sheets("AR").Range("A:M").Copy
+Goal.Sheets("AR").Range("A:M").Insert
+Source.Sheets("AR").Range("N:P").Copy
+Goal.Sheets("AR").Range("P:R").Insert
+Goal.Sheets("AR").Range("N1").Value = "Value (EUR)"
+Goal.Sheets("AR").Range("O1").Value = "Exchange Rate"
+Goal.Sheets("AR").Range("N2").Value = "=M2/O2"
+Goal.Sheets("AR").Range("O2").Value = "=++VLOOKUP(L2,'Exchage rates'!$A$1:$E$124,4,0)"
+
+'AP przenoszenie danych
+Goal.Sheets("AP").Cells.ClearContents
+Source.Sheets("AP").Range("A:M").Copy
+Goal.Sheets("AP").Range("A:M").Insert
+Source.Sheets("AP").Range("N:P").Copy
+Goal.Sheets("AP").Range("P:R").Insert
+Goal.Sheets("AP").Range("N1").Value = "Value (EUR)"
+Goal.Sheets("AP").Range("O1").Value = "Exchange Rate"
+Goal.Sheets("AP").Range("N2").Value = "=-M2/O2"
+Goal.Sheets("AP").Range("O2").Value = "=++VLOOKUP(L2,'Exchage rates'!$A$1:$E$124,4,0)"
+
+'Uzupelnianie formul w N2:O2
+'Workbooks.Open "docelowy.xlsm", False, True
+Goal.Sheets("AR").Activate
+Goal.Sheets("AR").Range("N2:O2").AutoFill Destination:=Range("N2:O" & Range("L" & Rows.Count).End(xlUp).Row)
+Goal.Sheets("AP").Activate
+Goal.Sheets("AP").Range("N2:O2").AutoFill Destination:=Range("N2:O" & Range("L" & Rows.Count).End(xlUp).Row)
+
+'AR+AP przenoszenie danych
+Goal.Sheets("AR+AP").Cells.ClearContents
+Goal.Sheets("AR").Range("A:R").Copy
+Goal.Sheets("AR+AP").Range("A:R").Insert
+Goal.Sheets("AP").Range("A2", Range("A2").End(xlDown).End(xlToRight)).Copy
+Goal.Sheets("AR+AP").Cells(Rows.Count, 1).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
+Application.CutCopyMode = False
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+Source.Close False
+
+Goal.Sheets("Tabelka").Activate
+MsgBox "Dane zostaly pomyslnie pobrane.", , "Pobieranie i koniunkcja danych AP i AR"
+
+End Sub

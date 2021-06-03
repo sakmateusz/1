@@ -1,0 +1,52 @@
+Sub OPliste()
+'21/10/19 sak.mateusz@gmail.com
+'makro weryfikuje czy data zamieszczona w kolumnie Net due date jest mniejsza czy wieksza od zadeklarowanej daty platnosci, oraz dostosowuje uklad i format raportu
+
+Dim dzienplatnosci As Date
+
+On Error GoTo Handler:
+
+Columns("A:A").EntireColumn.Delete
+Columns("B:C").EntireColumn.Insert
+
+Range("B1") = "Name"
+Range("C1") = "Country"
+dzienplatnosci = InputBox("Hej " & Application.username & " wpisz prosze date paymentu w formacie dd-mm-yy")
+Range("X1") = "Comment"
+Range("Y1") = "WHT"
+
+    Dim rw As Integer
+    rw = 2
+Do While Cells(rw, 22).Value <> ""
+        If Cells(rw, 22).Value <= dzienplatnosci Then
+        Cells(rw, 24).Value = "ok for payment"
+        Else: Cells(rw, 24).Value = "not yet due"
+        End If
+        If Cells(rw, 22).Value = Empty Then Cells(i, 24).Value = Empty
+    rw = rw + 1
+Loop
+
+Range("B2").Value = "=VLOOKUP(A2,MD!A2:C6001,3,0)"
+Range("C2").Value = "=VLOOKUP(A2,MD!A2:C6000,2,0)"
+
+Set rng1 = Range("A1:Y1")
+With rng1.Borders
+    .LineStyle = xlContinuous
+    .Weight = xlThin
+    End With
+Range("A1:Y1").Interior.Color = RGB(192, 192, 192)
+
+'format koncowki raportu, dziala tylko raz!
+Set rng2 = Range(ActiveSheet.Cells.SpecialCells(xlCellTypeLastCell).Offset(-2, -1), ActiveSheet.Cells.SpecialCells(xlCellTypeLastCell).Offset(0, 0))
+With rng2.Borders
+    .LineStyle = xlContinuous
+    .Weight = xlThin
+    End With
+rng2.Interior.Color = RGB(255, 255, 0)
+
+Exit Sub
+
+Handler:
+    MsgBox ("Zly format daty, wpisz prosze date paymentu w formacie dd-mm-yy")
+
+End Sub
