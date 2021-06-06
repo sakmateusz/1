@@ -1,0 +1,1234 @@
+'WBL + CHAPTER ONE
+'Wykonane przez Sak.Mateusz@gmail.com
+'05/11/20
+'zamieniono pojedyncze wiersze faktury metoda zewnetrznej procedury
+'zastapiono wyszukiwanie numeru odbiorcy funkcja
+'
+'
+
+Sub WBL()
+'28/10/19
+
+If ActiveWorkbook.ActiveSheet.Range("A2").Value = "Rechnung Gagen / sonstige Honorare" And ActiveWorkbook.ActiveSheet.Range("F2").Value = "Eingabefeld" Then Application.Run ("WBL_Honorar") _
+Else: Application.Run ("WBL_Standard")
+
+End Sub
+
+Sub WBL_CHAPTER_ONE()
+
+If ActiveWorkbook.ActiveSheet.Range("E3").Value = "Formular zur Kostenweiterbelastung" And ActiveWorkbook.ActiveSheet.Range("E9").Value = "Abteilung" Then Application.Run ("WBL_CHAPTER_Center") _
+Else: Application.Run ("WBL_CHAPTER_Box")
+
+End Sub
+
+Function GetCustomer(RangeTop As Range) As String
+'last update on 26/03/2021
+
+Dim Name As Variant
+
+Set Name = RangeTop.Find(What:="385ideal", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetGetCustomer = "DE655609"
+End If
+
+Set Name = RangeTop.Find(What:="ALMAZ", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetGetCustomer = "DE655505"
+End If
+
+Set Name = RangeTop.Find(What:="Alte Schule Records", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE758007"
+End If
+
+Set Name = RangeTop.Find(What:="AnnenMay", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE555072"
+End If
+
+Set Name = RangeTop.Find(What:="AON UG", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE555600"
+End If
+
+Set Name = RangeTop.Find(What:="Aykut", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE655502"
+End If
+
+Set Name = RangeTop.Find(What:="B.E.K. - Records UG", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE555055"
+End If
+
+Set Name = RangeTop.Find(What:="Bantu Nation UG", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155175"
+End If
+
+Set Name = RangeTop.Find(What:="Bela Boyz GmbH", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE455111"
+End If
+
+Set Name = RangeTop.Find(What:="Berliner Plattenbau GmbH", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155273"
+End If
+
+Set Name = RangeTop.Find(What:="Björn Dörpholz", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155180"
+End If
+
+Set Name = RangeTop.Find(What:="checkmate collective", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE350800"
+End If
+
+Set Name = RangeTop.Find(What:="c/o Kick The Flame", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155657"
+End If
+
+Set Name = RangeTop.Find(What:="Deine Freunde Merchandise GbR", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE255122"
+End If
+
+Set Name = RangeTop.Find(What:="Ehrlich Entertainment GmbH & Co. KG", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE355033"
+End If
+
+Set Name = RangeTop.Find(What:="Eleven45", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE157094"
+End If
+
+Set Name = RangeTop.Find(What:="Eklat Tonträger", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155235"
+End If
+
+Set Name = RangeTop.Find(What:="Farhad Nazarinejad", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE455071"
+End If
+
+Set Name = RangeTop.Find(What:="Felix von Heymann", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155282"
+End If
+
+Set Name = RangeTop.Find(What:="Freunde von Niemand UG", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE655030"
+End If
+
+Set Name = RangeTop.Find(What:="GMG-Music UG", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE355037"
+End If
+
+Set Name = RangeTop.Find(What:="Hussein Akkouche", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155191"
+End If
+
+Set Name = RangeTop.Find(What:="Hypnotize", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE755202"
+End If
+
+Set Name = RangeTop.Find(What:="I&U TV", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE552108"
+End If
+
+Set Name = RangeTop.Find(What:="Im- & Export Hamburg", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE255134"
+End If
+
+Set Name = RangeTop.Find(What:="Issa Both", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155264"
+End If
+
+Set Name = RangeTop.Find(What:="Jackson Castillo Beste Medien GbR", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE150098"
+End If
+
+Set Name = RangeTop.Find(What:="Jens Freudenberg", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155182"
+End If
+
+Set Name = RangeTop.Find(What:="JINX Music", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155338"
+End If
+
+Set Name = RangeTop.Find(What:="John & Partners Consulting", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE450703"
+End If
+
+Set Name = RangeTop.Find(What:="Juicy Money Records", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155186"
+End If
+
+Set Name = RangeTop.Find(What:="Koenig im Schatten Records", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE458009"
+End If
+
+Set Name = RangeTop.Find(What:="Life is Pain GmbH", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE455063"
+End If
+
+Set Name = RangeTop.Find(What:="Mama I Made It", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155275"
+End If
+
+Set Name = RangeTop.Find(What:="Manuel Marc Jungclaussen", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE658010"
+End If
+
+Set Name = RangeTop.Find(What:="Major Movez", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE015830"
+End If
+
+Set Name = RangeTop.Find(What:="MASKULIN", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155178"
+End If
+
+Set Name = RangeTop.Find(What:="Meistersinger Konzerte GmbH", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155156"
+End If
+
+Set Name = RangeTop.Find(What:="Millenium Music GmbH", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155636"
+End If
+
+Set Name = RangeTop.Find(What:="Milonair GmbH", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE255088"
+End If
+
+Set Name = RangeTop.Find(What:="nextBird", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155286"
+End If
+
+Set Name = RangeTop.Find(What:="Pulveraffen Merchandise GbR", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE455070"
+End If
+
+Set Name = RangeTop.Find(What:="Press Play", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE655301"
+End If
+
+Set Name = RangeTop.Find(What:="Rene Pfennig", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE150094"
+End If
+    
+Set Name = RangeTop.Find(What:="Santiano GbR", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE152213"
+End If
+
+Set Name = RangeTop.Find(What:="Seyed Mohammad Sascha Edalat-Pur", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE655026"
+End If
+
+Set Name = RangeTop.Find(What:="STS - Entertainment", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE013255"
+End If
+
+Set Name = RangeTop.Find(What:="Sultan", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155702"
+End If
+
+Set Name = RangeTop.Find(What:="Szegeny/Feige/Fach/Schulz", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155703"
+End If
+
+Set Name = RangeTop.Find(What:="V i n c e n t productions", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155510"
+End If
+
+Set Name = RangeTop.Find(What:="Vladyslav Balovatsky", After:=ActiveCell, LookIn:=xlFormulas, _
+    LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:= _
+    False, SearchFormat:=False)
+If Not Name Is Nothing Then 'gdy Name <> Nothing oznacza odnalezienie ciagu znakow
+    GetCustomer = "DE155189"
+End If
+
+If GetCustomer = "" Then
+    GetCustomer = InputBox("Wprowadz numer odbiorcy rachunku zgodny z XD03", "WBL CHAPTER ONE")
+    If GetCustomer = "" Then Exit Function
+End If
+
+End Function
+
+Public Sub WBLLineLeft(Row As String, VATrate As String, LineInvoiceText As Variant, Amount As Variant, GLAccount As Variant, WBSElement As Variant, Assignment As Variant)
+
+Dim connection
+Dim Application1
+Dim session
+
+If Not IsObject(Application1) Then
+   Set SapGuiAuto = GetObject("SAPGUI")
+   Set Application1 = SapGuiAuto.GetScriptingEngine
+End If
+If Not IsObject(connection) Then
+   Set connection = Application1.Children(0)
+End If
+If Not IsObject(session) Then
+   Set session = connection.Children(0)
+End If
+
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").Text = VATrate
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ZMENG[2," & Row & "]").Text = "1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ARKTX[7," & Row & "]").Text = LineInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").caretPosition = 3
+session.findById("wnd[0]").sendVKey 2
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").caretPosition = 14
+session.findById("wnd[0]").sendVKey 2
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\04").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/ctxtKOMV-KSCHL[1,2]").Text = "pr00"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/ctxtKOMV-KSCHL[1,2]").caretPosition = 4
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").Text = Amount
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").caretPosition = 14
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-SAKNR").Text = GLAccount
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").Text = WBSElement
+        session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/txtVBAP-ZZSD_ASSIGNMENT").Text = Assignment
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").caretPosition = 24
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[1]").sendVKey 0
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+
+End Sub
+
+Public Sub WBLLineRight(Row As String, VATrate As String, LineInvoiceText As Variant, Amount As Variant, GLAccount As Variant, WBSElement As Variant, Assignment As Variant)
+
+Dim connection
+Dim Application1
+Dim session
+
+If Not IsObject(Application1) Then
+   Set SapGuiAuto = GetObject("SAPGUI")
+   Set Application1 = SapGuiAuto.GetScriptingEngine
+End If
+If Not IsObject(connection) Then
+   Set connection = Application1.Children(0)
+End If
+If Not IsObject(session) Then
+   Set session = connection.Children(0)
+End If
+
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").Text = VATrate
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ZMENG[2," & Row & "]").Text = "1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ARKTX[7," & Row & "]").Text = LineInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").caretPosition = 3
+session.findById("wnd[0]").sendVKey 2
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1," & Row & "]").caretPosition = 8
+session.findById("wnd[0]").sendVKey 2
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-SAKNR").Text = GLAccount
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").Text = WBSElement
+          session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/txtVBAP-ZZSD_ASSIGNMENT").Text = Assignment
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").caretPosition = 24
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[1]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/ctxtKOMV-KSCHL[1,2]").Text = "pr00"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/ctxtKOMV-KSCHL[1,2]").caretPosition = 4
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").Text = Amount
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").caretPosition = 14
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\04").Select
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+
+End Sub
+
+Sub WBL_CHAPTER_Center()
+'04/11/2020
+
+'seria zmiennych wspolna dla calego rachunku
+Dim CompanyCode As Variant
+Dim Name As Variant
+Dim Customer As Variant
+Dim VATrate As String
+Dim PaymentTermstest As Variant
+Dim PaymentTerms As Variant
+Dim GeneralInvoiceText As Variant
+Dim Formular As Range
+Dim IndexRange As Range
+    'Dim Header As Range
+Dim Servrendered As Variant
+    
+Set Formular = Range("A1:AD84")
+Set IndexRange = Range(Formular.Find("Pos.", LookIn:=xlValues).Offset(38, 18), Formular.Find("Pos.", LookIn:=xlValues).Offset(2, 0))
+    'Set Header = Range(Formular.find("Rechnungsempfänger", LookIn:=xlValues).Offset(5, 12), Formular.find("Rechnungsempfänger", LookIn:=xlValues).Offset(2, 0))
+
+CompanyCode = "de05" 'InputBox("Wprowadz Sales Organization/Company Code na ktorym ma powstac rachunek. Np.: de05 lub de01")
+Customer = GetCustomer(Formular)
+
+VATrate = InputBox("Wprowadz kod materialowy/podatkowy Np.: 616, 617", "WBL CHAPTER ONE")
+            If VATrate = "" Then Exit Sub
+Servrendered = InputBox("Wprowadz dzien wykonania uslugi w formacie DD.MM.RRRR jesli usluga obejmowala okres czasu wpisz ostatni dzien okresu", "WBL CHAPTER ONE")
+PaymentTermstest = MsgBox("Czy termin splaty to 0 dni?", vbYesNo + vbQuestion, "WBL CHAPTER ONE")
+    If PaymentTermstest = vbYes Then PaymentTerms = "0000"
+    If PaymentTermstest = vbNo Then PaymentTerms = InputBox("Wprowadz termin splaty w formacie SAP Np.: 0000, 0014", "WBL CHAPTER ONE")
+            If PaymentTerms = "" Then Exit Sub
+GeneralInvoiceText = RTrim(Formular.Find("Bezeichnung", LookIn:=xlValues).Offset(2, 0).Value)
+
+       'Zestaw zmiennych niezbednych do uruchomienia SAP
+        Dim connection
+        Dim Application1
+        Dim session
+
+        'makro uruchamia SAP
+        If Not IsObject(Application1) Then
+           Set SapGuiAuto = GetObject("SAPGUI")
+           Set Application1 = SapGuiAuto.GetScriptingEngine
+        End If
+        If Not IsObject(connection) Then
+           Set connection = Application1.Children(0)
+        End If
+        If Not IsObject(session) Then
+           Set session = connection.Children(0)
+        End If
+        If IsObject(WScript) Then
+           WScript.ConnectObject session, "on"
+           WScript.ConnectObject Application, "on"
+        End If
+        'makro uruchomilo SAP i wykonuje w nim nastepujace polecenia
+
+'pierwsza strona /nva01
+session.findById("wnd[0]").maximize
+session.findById("wnd[0]/tbar[0]/okcd").Text = "/nva01"
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/ctxtVBAK-AUART").Text = "zdr"
+session.findById("wnd[0]/usr/ctxtVBAK-VKORG").Text = CompanyCode 'DE152097
+session.findById("wnd[0]/usr/ctxtVBAK-VTWEG").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").SetFocus
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").caretPosition = 2
+session.findById("wnd[0]").sendVKey 0
+
+'dane wspolne dla rachunku
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").Text = Customer
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").caretPosition = 8
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]").sendVKey 0
+        'Servrendered = data wykonania uslugi
+        session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").Text = Servrendered
+        session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").caretPosition = 10
+        session.findById("wnd[0]").sendVKey 0
+        session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/btnBT_HEAD").press
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").Text = PaymentTerms
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").caretPosition = 4
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 0, 29
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").selectItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").ensureVisibleHorizontalItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 28, 28
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+
+'seria zmiennych dla okreslonej linii rachunku
+    Dim LineInvoiceText As Variant
+    Dim GLAccount As Variant
+    Dim WBSElement As Variant
+    Dim Amount As Variant
+    Dim Assignment As Variant
+ 
+If Application.WorksheetFunction.Index(IndexRange, 1, 3) = "" Then Exit Sub
+LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 1, 3), 40)
+GLAccount = Application.WorksheetFunction.Index(IndexRange, 2, 9)
+WBSElement = Application.WorksheetFunction.Index(IndexRange, 1, 12)
+Amount = Application.WorksheetFunction.Index(IndexRange, 1, 15)
+Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 1, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+    
+'pierwsza linia
+Call WBLLineLeft("0", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+
+'2 linia
+If Application.WorksheetFunction.Index(IndexRange, 4, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 4, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 4, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 5, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 4, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 4, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 4, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("1", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'3 linia
+If Application.WorksheetFunction.Index(IndexRange, 7, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 7, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 7, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 8, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 7, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 7, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 7, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("2", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'4 linia
+If Application.WorksheetFunction.Index(IndexRange, 10, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 10, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 10, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 11, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 10, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 10, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 10, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("3", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'5 linia
+If Application.WorksheetFunction.Index(IndexRange, 13, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 13, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 13, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 14, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 13, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 13, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 13, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("4", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'6 linia
+If Application.WorksheetFunction.Index(IndexRange, 16, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 16, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 16, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 17, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 16, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 16, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 16, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("5", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'7 linia
+If Application.WorksheetFunction.Index(IndexRange, 19, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 19, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 19, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 20, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 19, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 19, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 19, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("6", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'8 linia
+If Application.WorksheetFunction.Index(IndexRange, 22, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 22, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 22, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 23, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 22, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 22, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 22, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("7", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'9 linia
+If Application.WorksheetFunction.Index(IndexRange, 25, 3) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 25, 3).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 25, 3), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 26, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 25, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 25, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 25, 18), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("8", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+End Sub
+
+Sub WBL_CHAPTER_Box()
+'04/11/2020
+
+'seria zmiennych wspolna dla calego rachunku
+Dim CompanyCode As Variant
+Dim Name As Variant
+Dim Customer As Variant
+Dim VATrate As String
+Dim PaymentTermstest As Variant
+Dim PaymentTerms As Variant
+Dim GeneralInvoiceText As Variant
+Dim Formular As Range
+Dim IndexRange As Range
+    'Dim Header As Range
+Dim Servrendered As Variant
+
+Set Formular = Range("A1:AD84")
+Set IndexRange = Range(Formular.Find("Pos.", LookIn:=xlValues).Offset(38, 18), Formular.Find("Pos.", LookIn:=xlValues).Offset(2, 0))
+    'Set Header = Range(Formular.find("Rechnungsempfänger", LookIn:=xlValues).Offset(5, 12), Formular.find("Rechnungsempfänger", LookIn:=xlValues).Offset(2, 0))
+
+CompanyCode = "de05" 'InputBox("Wprowadz Sales Organization/Company Code na ktorym ma powstac rachunek. Np.: de05 lub de01")
+Customer = GetCustomer(Formular)
+
+VATrate = InputBox("Wprowadz kod materialowy/podatkowy Np.: 616, 617", "WBL CHAPTER ONE")
+            If VATrate = "" Then Exit Sub
+Servrendered = InputBox("Wprowadz dzien wykonania uslugi w formacie DD.MM.RRRR jesli usluga obejmowala okres czasu wpisz ostatni dzien okresu", "WBL CHAPTER ONE")
+PaymentTermstest = MsgBox("Czy termin splaty to 0 dni?", vbYesNo + vbQuestion, "WBL CHAPTER ONE")
+    If PaymentTermstest = vbYes Then PaymentTerms = "0000"
+    If PaymentTermstest = vbNo Then PaymentTerms = InputBox("Wprowadz termin splaty w formacie SAP Np.: 0000, 0014", "WBL CHAPTER ONE")
+            If PaymentTerms = "" Then Exit Sub
+GeneralInvoiceText = RTrim(Formular.Find("Bezeichnung", LookIn:=xlValues).Offset(1, 0).Value)
+
+        'Zestaw zmiennych niezbednych do uruchomienia SAP
+        Dim connection
+        Dim Application1
+        Dim session
+
+        'makro uruchamia SAP
+        If Not IsObject(Application1) Then
+           Set SapGuiAuto = GetObject("SAPGUI")
+           Set Application1 = SapGuiAuto.GetScriptingEngine
+        End If
+        If Not IsObject(connection) Then
+           Set connection = Application1.Children(0)
+        End If
+        If Not IsObject(session) Then
+           Set session = connection.Children(0)
+        End If
+        If IsObject(WScript) Then
+           WScript.ConnectObject session, "on"
+           WScript.ConnectObject Application, "on"
+        End If
+        'makro uruchomilo SAP i wykonuje w nim nastepujace polecenia
+
+'pierwsza strona /nva01
+session.findById("wnd[0]").maximize
+session.findById("wnd[0]/tbar[0]/okcd").Text = "/nva01"
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/ctxtVBAK-AUART").Text = "zdr"
+session.findById("wnd[0]/usr/ctxtVBAK-VKORG").Text = CompanyCode 'DE152097
+session.findById("wnd[0]/usr/ctxtVBAK-VTWEG").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").SetFocus
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").caretPosition = 2
+session.findById("wnd[0]").sendVKey 0
+
+'dane wspolne dla rachunku
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").Text = Customer
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").caretPosition = 8
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]").sendVKey 0
+        'Servrendered = data wykonania uslugi
+        session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").Text = Servrendered
+        session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").caretPosition = 10
+        session.findById("wnd[0]").sendVKey 0
+        session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/btnBT_HEAD").press
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").Text = PaymentTerms
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").caretPosition = 4
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 0, 29
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").selectItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").ensureVisibleHorizontalItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 28, 28
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+
+'seria zmiennych dla okreslonej linii rachunku
+    Dim LineInvoiceText As Variant
+    Dim GLAccount As Variant
+    Dim WBSElement As Variant
+    Dim Amount As Variant
+    Dim Assignment As Variant
+ 
+If Application.WorksheetFunction.Index(IndexRange, 1, 2) = "" Then Exit Sub
+LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 1, 2), 40)
+GLAccount = Application.WorksheetFunction.Index(IndexRange, 2, 10)
+WBSElement = Application.WorksheetFunction.Index(IndexRange, 2, 13)
+Amount = Application.WorksheetFunction.Index(IndexRange, 2, 15)
+Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 2, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+
+'pierwsza linia
+Call WBLLineLeft("0", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+
+'2 linia
+If Application.WorksheetFunction.Index(IndexRange, 4, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 4, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 4, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 5, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 5, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 5, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 5, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("1", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'3 linia
+If Application.WorksheetFunction.Index(IndexRange, 7, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 7, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 7, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 8, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 8, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 8, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 8, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("2", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'4 linia
+If Application.WorksheetFunction.Index(IndexRange, 10, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 10, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 10, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 11, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 11, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 11, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 11, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("3", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'5 linia
+If Application.WorksheetFunction.Index(IndexRange, 13, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 13, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 13, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 14, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 14, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 14, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 14, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("4", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'6 linia
+If Application.WorksheetFunction.Index(IndexRange, 16, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 16, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 16, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 17, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 17, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 17, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 17, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("5", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'7 linia
+If Application.WorksheetFunction.Index(IndexRange, 19, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 19, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 19, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 20, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 20, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 20, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 20, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineLeft("6", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+'8 linia
+If Application.WorksheetFunction.Index(IndexRange, 22, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 22, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 22, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 23, 10)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 23, 13)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 23, 15)
+    Assignment = Left(Application.WorksheetFunction.Index(IndexRange, 23, 19), 10)
+    If Assignment = 0 Then Assignment = ""
+Call WBLLineRight("7", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, Assignment)
+End If
+
+End Sub
+
+Sub WBL_Honorar()
+'05/11/2020
+
+On Error Resume Next
+
+Dim CompanyCode As Variant
+Dim Customer As Variant
+Dim VATtest As Variant
+Dim VATrate As String
+Dim LineInvoiceTest As Variant
+Dim LineInvoiceText As Variant
+Dim PaymentTermstest As Variant
+Dim PaymentTerms As Variant
+Dim GeneralInvoiceText As Variant
+Dim Amount As Variant
+Dim GLAccount As Variant
+Dim WBSElement As Variant
+Dim Servrendered As Variant
+
+CompanyCode = InputBox("Wprowadz Sales Organization/Company Code na ktorym ma powstac rachunek. Np.: de05 lub de01", "WBL Honorar")
+            If CompanyCode = "" Then Exit Sub
+Customer = InputBox("Wprowadz numer odbiorcy rachunku zgodny z XD03", "WBL Honorar")
+            If Customer = "" Then Exit Sub
+VATtest = Range("A1:K82").Find("Rechnungsbetrag", LookIn:=xlValues).Offset(1, 4).Text
+    If VATtest = "7% USt." Then VATrate = "617"
+    If VATtest = "5% USt." Then VATrate = "617"
+    If VATtest = "19% USt." Then VATrate = "616"
+    If VATtest = "16% USt." Then VATrate = "616"
+    'If VATtest.Text = "" Then VATrate = InputBox("Wprowadz kod materialowy/podatkowy Np.: 616, 617", "WBL Honorar")
+                        'If VATrate = "" Then Exit Sub
+Servrendered = InputBox("Wprowadz dzien wykonania uslugi w formacie DD.MM.RRRR jesli usluga obejmowala okres czasu wpisz ostatni dzien okresu", "WBL Honorar")
+Set LineInvoiceTest = Range("A1:K82").Find("Buchungstext", LookIn:=xlValues)
+    If LineInvoiceTest Is Nothing Then
+    LineInvoiceText = Mid(Range("A1:K82").Find("Rechnungsbetrag", LookIn:=xlValues).Offset(0, 4).Text, 6, 8)
+    Else
+    LineInvoiceText = Left(Range("A1:K82").Find("Buchungstext", LookIn:=xlValues).Offset(0, 2).Text, 40)
+    End If
+PaymentTermstest = MsgBox("Czy termin splaty to 30 dni?", vbYesNo + vbQuestion, "WBL Honorar")
+    If PaymentTermstest = vbYes Then PaymentTerms = "0030"
+    If PaymentTermstest = vbNo Then PaymentTerms = InputBox("Wprowadz termin splaty w formacie SAP Np.: 0000, 0014", "WBL Honorar")
+                If PaymentTerms = "" Then Exit Sub
+GeneralInvoiceText = RTrim(Range("A1:K82").Find("Rechnungstext", LookIn:=xlValues).Offset(0, 2).Value)
+Amount = Range("A1:K82").Find("Rechnungsbetrag", LookIn:=xlValues).Offset(0, 2).Value
+GLAccount = Range("A1:K82").Find("SAP Konto", LookIn:=xlValues).Offset(0, 2).Text
+WBSElement = Range("A1:K82").Find("WBS-Element", LookIn:=xlValues).Offset(0, 2).Value
+
+        'Zestaw zmiennych niezbednych do uruchomienia SAP
+        Dim connection
+        Dim Application1
+        Dim session
+
+        'makro uruchamia SAP
+        If Not IsObject(Application1) Then
+           Set SapGuiAuto = GetObject("SAPGUI")
+           Set Application1 = SapGuiAuto.GetScriptingEngine
+        End If
+        If Not IsObject(connection) Then
+           Set connection = Application1.Children(0)
+        End If
+        If Not IsObject(session) Then
+           Set session = connection.Children(0)
+        End If
+        If IsObject(WScript) Then
+           WScript.ConnectObject session, "on"
+           WScript.ConnectObject Application, "on"
+        End If
+        'makro uruchomilo SAP i wykonuje w nim nastepujace polecenia
+
+session.findById("wnd[0]").maximize
+session.findById("wnd[0]/tbar[0]/okcd").Text = "/nva01"
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/ctxtVBAK-AUART").Text = "zdr"
+session.findById("wnd[0]/usr/ctxtVBAK-VKORG").Text = CompanyCode
+session.findById("wnd[0]/usr/ctxtVBAK-VTWEG").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").SetFocus
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").caretPosition = 2
+session.findById("wnd[0]").sendVKey 0
+
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").Text = Customer
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").Text = Servrendered
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").caretPosition = 10
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1,0]").Text = VATrate
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ZMENG[2,0]").Text = "1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ARKTX[7,0]").Text = LineInvoiceText
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ARKTX[7,0]").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/txtVBAP-ARKTX[7,0]").caretPosition = 0
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/btnBT_HEAD").press
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").Text = PaymentTerms
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").caretPosition = 4
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText + vbCr + ""
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 0, 50
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").selectItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").ensureVisibleHorizontalItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText + vbCr + ""
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 49, 49
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").selectItem "0001", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").ensureVisibleHorizontalItem "0001", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickItem "0001", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 0, 0
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1,0]").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/subSUBSCREEN_TC:SAPMV45A:4902/tblSAPMV45ATCTRL_U_ERF_GUTLAST/ctxtRV45A-MABNR[1,0]").caretPosition = 12
+session.findById("wnd[0]").sendVKey 2
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\03").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\04").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05").Select
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/ctxtKOMV-KSCHL[1,2]").Text = "pr00"
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/ctxtKOMV-KSCHL[1,2]").caretPosition = 4
+    session.findById("wnd[0]").sendVKey 0
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").Text = Amount
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").SetFocus
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\05/ssubSUBSCREEN_BODY:SAPLV69A:6201/tblSAPLV69ATCTRL_KONDITIONEN/txtKOMV-KBETR[3,0]").caretPosition = 14
+    session.findById("wnd[0]").sendVKey 0
+    session.findById("wnd[1]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06").Select
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/txtVBAP-ZZSD_ASSIGNMENT").Text = "Kurdo 2020"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-SAKNR").Text = GLAccount
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/subCOBL:SAPLKACB:9001/ctxtCOBL-PS_POSID").Text = WBSElement
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/txtVBAP-ZZSD_ASSIGNMENT").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\06/ssubSUBSCREEN_BODY:SAPMV45A:4457/txtVBAP-ZZSD_ASSIGNMENT").caretPosition = 10
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+    'session.findById("wnd[1]").sendVKey 0
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\08").Select
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\08/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").selectItem "Z002", "Column1"
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\08/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").ensureVisibleHorizontalItem "Z002", "Column1"
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\08/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickItem "Z002", "Column1"
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\08/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = "Dieser Betrag wird mit der nächsten Lizenzabrechnung verrechnet bzw. gemäß Vertrag fällig." + vbCr + ""
+    'session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_ITEM/tabpT\08/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 90, 90
+    'session.findById("wnd[0]/tbar[0]/btn[3]").press
+
+End Sub
+
+Sub WBL_Standard()
+'05/11/2020
+DoEvents
+
+'seria zmiennych wspolna dla calego rachunku
+Dim CompanyCode As Variant
+Dim Customer As Variant
+Dim VATrate As String
+Dim PaymentTermstest As Variant
+Dim PaymentTerms As Variant
+Dim GeneralInvoiceText As Variant
+Dim Formular As Range
+Dim IndexRange As Range
+Dim Servrendered As Variant
+
+Set Formular = Range("A1:T84")
+Set IndexRange = Range(Formular.Find("Pos.", LookIn:=xlValues).Offset(38, 12), Formular.Find("Pos.", LookIn:=xlValues).Offset(2, 0))
+
+CompanyCode = InputBox("Wprowadz Sales Organization/Company Code na ktorym ma powstac rachunek. Np.: de05 lub de01", "WBL Standard")
+            If CompanyCode = "" Then Exit Sub
+Customer = InputBox("Wprowadz numer odbiorcy rachunku zgodny z XD03", "WBL Standard") 'DE151056
+            If Customer = "" Then Exit Sub
+VATrate = InputBox("Wprowadz kod materialowy/podatkowy Np.: 616, 617", "WBL Standard")
+Servrendered = InputBox("Wprowadz dzien wykonania uslugi w formacie DD.MM.RRRR jesli usluga obejmowala okres czasu wpisz ostatni dzien okresu", "WBL Standard")
+PaymentTermstest = MsgBox("Czy termin splaty to 30 dni?", vbYesNo + vbQuestion, "WBL Standard")
+    If PaymentTermstest = vbYes Then PaymentTerms = "0030"
+    If PaymentTermstest = vbNo Then PaymentTerms = InputBox("Wprowadz termin splaty w formacie SAP Np.: 0000, 0014", "WBL Standard")
+                If PaymentTerms = "" Then Exit Sub
+GeneralInvoiceText = RTrim(Formular.Find("Text /Bezeichnung", LookIn:=xlValues).Offset(1, 0).Value)
+
+        'Zestaw zmiennych niezbednych do uruchomienia SAP
+        Dim connection
+        Dim Application1
+        Dim session
+
+        'makro uruchamia SAP
+        If Not IsObject(Application1) Then
+           Set SapGuiAuto = GetObject("SAPGUI")
+           Set Application1 = SapGuiAuto.GetScriptingEngine
+        End If
+        If Not IsObject(connection) Then
+           Set connection = Application1.Children(0)
+        End If
+        If Not IsObject(session) Then
+           Set session = connection.Children(0)
+        End If
+        If IsObject(WScript) Then
+           WScript.ConnectObject session, "on"
+           WScript.ConnectObject Application, "on"
+        End If
+        'makro uruchomilo SAP i wykonuje w nim nastepujace polecenia
+
+'pierwsza strona /nva01
+session.findById("wnd[0]").maximize
+session.findById("wnd[0]/tbar[0]/okcd").Text = "/nva01"
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/ctxtVBAK-AUART").Text = "zdr"
+session.findById("wnd[0]/usr/ctxtVBAK-VKORG").Text = CompanyCode 'DE152097
+session.findById("wnd[0]/usr/ctxtVBAK-VTWEG").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").Text = "01"
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").SetFocus
+session.findById("wnd[0]/usr/ctxtVBAK-SPART").caretPosition = 2
+session.findById("wnd[0]").sendVKey 0
+
+'dane wspolne dla rachunku
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").Text = Customer
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/subPART-SUB:SAPMV45A:4701/ctxtKUAGV-KUNNR").caretPosition = 8
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]").sendVKey 0
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").Text = Servrendered
+    session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_OVERVIEW/tabpT\02/ssubSUBSCREEN_BODY:SAPMV45A:4415/ctxtVBKD-FBUDA").caretPosition = 10
+    session.findById("wnd[0]").sendVKey 0
+    session.findById("wnd[1]/tbar[0]/btn[0]").press
+session.findById("wnd[0]/usr/subSUBSCREEN_HEADER:SAPMV45A:4021/btnBT_HEAD").press
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").Text = PaymentTerms
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").SetFocus
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\03/ssubSUBSCREEN_BODY:SAPMV45A:4303/ctxtVBKD-ZTERM").caretPosition = 4
+session.findById("wnd[0]").sendVKey 0
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10").Select
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText + vbCr + ""
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 0, 162
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").selectItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").ensureVisibleHorizontalItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickItem "0002", "Column1"
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").Text = GeneralInvoiceText + vbCr + "" + vbCr + ""
+session.findById("wnd[0]/usr/tabsTAXI_TABSTRIP_HEAD/tabpT\10/ssubSUBSCREEN_BODY:SAPMV45A:4152/subSUBSCREEN_TEXT:SAPLV70T:2100/cntlSPLITTER_CONTAINER/shellcont/shellcont/shell/shellcont[1]/shell").setSelectionIndexes 162, 162
+session.findById("wnd[0]/tbar[0]/btn[3]").press
+
+'seria zmiennych dla okreslonej linii rachunku
+    Dim LineInvoiceText As Variant
+    Dim GLAccount As Variant
+    Dim WBSElement As Variant
+    Dim Amount As Variant
+    
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 1, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 2, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 2, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 1, 13)
+    
+'pierwsza linia
+Call WBLLineLeft("0", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+
+'2 linia
+If Application.WorksheetFunction.Index(IndexRange, 3, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 3, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 3, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 5, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 5, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 3, 13)
+Call WBLLineRight("1", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'3 linia
+If Application.WorksheetFunction.Index(IndexRange, 6, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 6, 2).Text)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 6, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 8, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 8, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 6, 13)
+Call WBLLineLeft("2", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'4 linia
+If Application.WorksheetFunction.Index(IndexRange, 9, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 9, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 9, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 11, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 11, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 9, 13)
+Call WBLLineRight("3", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'5 linia
+If Application.WorksheetFunction.Index(IndexRange, 12, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 12, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 12, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 14, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 14, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 12, 13)
+Call WBLLineLeft("4", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'6 linia
+If Application.WorksheetFunction.Index(IndexRange, 15, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 15, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 15, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 17, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 17, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 15, 13)
+Call WBLLineRight("5", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'7 linia
+If Application.WorksheetFunction.Index(IndexRange, 18, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 18, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 18, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 20, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 20, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 18, 13)
+Call WBLLineLeft("6", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'8 linia
+If Application.WorksheetFunction.Index(IndexRange, 21, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 21, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 21, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 23, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 23, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 21, 13)
+Call WBLLineRight("7", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'9 linia
+If Application.WorksheetFunction.Index(IndexRange, 24, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 24, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 24, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 26, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 26, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 24, 13)
+Call WBLLineLeft("8", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'10 linia
+If Application.WorksheetFunction.Index(IndexRange, 27, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 27, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 27, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 29, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 29, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 27, 13)
+Call WBLLineRight("9", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+'11 linia
+If Application.WorksheetFunction.Index(IndexRange, 30, 2) = "" Then Exit Sub
+If IsEmpty(IsEmpty(Application.WorksheetFunction.Index(IndexRange, 30, 2).Value)) = False Then
+    LineInvoiceText = Left(Application.WorksheetFunction.Index(IndexRange, 30, 2), 40)
+    GLAccount = Application.WorksheetFunction.Index(IndexRange, 32, 9)
+    WBSElement = Application.WorksheetFunction.Index(IndexRange, 32, 12)
+    Amount = Application.WorksheetFunction.Index(IndexRange, 30, 13)
+Call WBLLineLeft("10", VATrate, LineInvoiceText, Amount, GLAccount, WBSElement, "")
+End If
+
+End Sub
+
