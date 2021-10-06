@@ -1,0 +1,231 @@
+
+Private Function FunctionFindAll(ISIN As Variant, Source As Workbook) As Range
+'15/06/21
+'działa w pliku excel z Bloomberga
+
+Dim fnd As Variant, FirstFound As String
+Dim FoundCell As Range, rng As Range
+Dim myRange As Range, LastCell As Range
+
+'you can add more than just "PL0000102646", it just have to be in one cell
+'use Array("PL0000102646", "@BGN")
+fnd = Array(ISIN)
+
+Set myRange = ActiveSheet.UsedRange
+Set LastCell = myRange.Cells(myRange.Cells.Count)
+Set FoundCell = myRange.Find(What:=fnd, after:=LastCell)
+
+'Test to see if anything was found
+  If Not FoundCell Is Nothing Then
+    FirstFound = FoundCell.Address
+  Else
+    GoTo NothingFound
+  End If
+
+Set rng = FoundCell
+
+'Loop until cycled through all unique finds
+  Do Until FoundCell Is Nothing
+    'Find next cell with fnd value
+      Set FoundCell = myRange.FindNext(after:=FoundCell)
+    
+    'Add found cell to rng range variable
+      Set rng = Union(rng, FoundCell)
+    
+    'Test to see if cycled through to first found cell
+      If FoundCell.Address = FirstFound Then Exit Do
+      
+  Loop
+
+'Select Cells Containing Find Value
+  'rng.Offset(0, 4).Select '(działa)
+  Range(rng.Offset(0, 4), rng.Offset(0, 5)).Select
+
+'Selection.Copy
+
+Exit Function
+
+'Error Handler
+NothingFound:
+  MsgBox "Nie odnaleziono danych obligacji ISIN: " & ISIN, , "Plik z Bloomberga"
+  myRange.Range("A1").Select
+
+End Function
+
+Sub reszta3LoopNaTabeli()
+'22/07/21
+'działa dla pięciu pozycji
+'UWAGA! Jeśli makro nie odnajdzie ISIN w Wartościach to zniszczy kompletnie dane poprzedniej w kolejności obligacji
+'testowane na zbiorze z pustymi pozycjami, bezpiecznie omija puste pola
+
+Dim Source As Workbook
+Dim Goal As Workbook
+Dim FileToOpen As Variant
+'Dim Question As Integer
+Dim GoalName As String
+Dim ISIN As Variant
+
+'zmienne z poszukiwań miesca do wklejenia
+Dim fnd As Variant
+Dim rngFound As Range
+Dim pasteSpot As Variant
+
+'Question = MsgBox("Uwaga! Czy plik zostal poprawnie przygotowany do importu?" & vbNewLine & _
+"Plik z Bloomberg musi zostać zapisany w formacie .xlsx " & _
+"oraz dane do przeniesienia muszą zostać rozbite funkcją Tekst Jako Kolumny" & vbNewLine & _
+"Jeśli plik załadunkowy został przygotowany poprawnie nacisnij Yes." & vbNewLine _
+, vbQuestion + vbYesNo + vbDefaultButton2, "Czy plik zostal przygotowany do importu?")
+'If Question = vbNo Then Exit Sub
+
+
+GoalName = ActiveWorkbook.Name
+Set Goal = Application.Workbooks(GoalName)
+'Set Goal = Application.Workbooks("Test_cen_last_20210714_MDR.xlsm")
+
+FileToOpen = Application.GetOpenFilename(Title:="Otwórz plik zródlowy z danymi wycen Bloomberg")
+If FileToOpen = False Then Exit Sub
+If FileToOpen <> False Then
+Set Source = Application.Workbooks.Open(FileToOpen)
+End If
+
+'testowe i działa
+'Goal.Worksheets("ISIN").Range("I2:I6").Value
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+Goal.Worksheets("ISIN").Columns("G:G").ClearContents
+Goal.Worksheets("ISIN").Range("G1").Value = "Status"
+
+For Each ISIN In Goal.Worksheets("ISIN").Range("A2:A76").Value
+    
+        'fnd = Array("PL0000102646@BGN  Corp")
+        fnd = Array(ISIN & "@")
+        
+        Goal.Worksheets("Wartości_bloomberg").Activate
+        
+            'oddzielenie zakresu formatem
+            With Goal.Worksheets("Wartości_bloomberg").Cells
+                Set rngFound = .Find(fnd, LookIn:=xlValues)
+                If Not rngFound Is Nothing Then
+                    'something is found
+                    rngFound.Offset(2, 0).Select
+                    With Range(Selection, Selection.End(xlDown).Offset(0, -1)).Borders(xlEdgeBottom)
+                        .LineStyle = xlContinuous
+                        .Weight = xlMedium
+                    End With
+                    Goal.Worksheets("ISIN").Columns("A:A").Find(ISIN, LookIn:=xlValues).Offset(0, 6).Value = "Zakres oddzielony kreska"
+                Else
+                    'nothing found
+                    'MsgBox "Nie odnaleziono miejsca do formatu dotycznącego ISIN " & ISIN, , GoalName
+                    Goal.Worksheets("ISIN").Columns("A:A").Find(ISIN, LookIn:=xlValues).Offset(0, 6).Value = "Nie odnaleziono miejsca do formatu dotycznącego ISIN: " & ISIN
+                End If
+            End With
+        
+        'Czyścimy schowek
+        Application.CutCopyMode = False
+        
+        'Kopiujemy
+        Source.Worksheets(1).Activate
+        Call FunctionFindAll(ISIN, Source)
+        'UWAGA! Trzeba wymyśleć test na to czy zakres w selection jest pusty!
+        'If WorksheetFunction.CountA(Selection) = 0 Then
+            'GoTo Nastepny
+        'Else
+            Selection.Copy
+        'End If
+        
+        'Zmienna która sprawdza datę z selekcji pliku bloomberg
+        DataBloomberg = Selection.Item(1, 1).Value
+
+            'Szukamy gdzie wkleić
+            Goal.Worksheets("Wartości_bloomberg").Activate
+            With Goal.Worksheets("Wartości_bloomberg").Cells
+                Set rngFound = .Find(fnd, LookIn:=xlValues)
+                If Not rngFound Is Nothing Then
+                    'something is found
+                    rngFound.Offset(2, 0).Select
+                    
+                    'pasteSpot = Selection.End(xlDown).Offset(0, -1).Select
+                    'było i działało:
+                    'pasteSpot = Selection.End(xlDown).Offset(1, -1).Select
+                    
+                    '==== CZESC ROBOCZA ===== 22/07/2021
+                    pasteSpot = Selection.End(xlDown).Offset(0, -1).Select
+                    If Selection.Value <> DataBloomberg Then
+                        pasteSpot = rngFound.Offset(2, 0).End(xlDown).Offset(1, -1).Select
+                    Else
+                        pasteSpot = rngFound.Offset(2, 0).End(xlDown).Offset(0, -1).Select
+                    End If
+                                       
+                    'MsgBox (Selection.Value)
+                    '==== KONIEC CZESCI ROBOCZEJ ==== 22/07/2021
+                    
+                Else
+                    'nothing found
+                    'MsgBox "Nie odnaleziono miejsca do wklejenia danych ISIN " & ISIN, , GoalName
+                    Goal.Worksheets("ISIN").Columns("A:A").Find(ISIN, LookIn:=xlValues).Offset(0, 6).Value = "Nie odnaleziono miejsca do wklejenia danych ISIN: " & ISIN
+                End If
+            End With
+        
+        'Wklejamy
+        Selection.PasteSpecial Paste:=xlPasteValues
+               
+            'Remove Duplicates
+            With Goal.Worksheets("Wartości_bloomberg").Cells
+                Set rngFound = .Find(fnd, LookIn:=xlValues)
+                If Not rngFound Is Nothing Then
+                    'something is found
+                    rngFound.Offset(2, 0).Select
+                    Range(rngFound.Offset(2, 0), rngFound.Offset(2, -1).End(xlDown)).Select
+                    Selection.RemoveDuplicates Columns:=Array(1, 2)
+                Else
+                    'nothing found
+                    MsgBox "Nie odnaleziono zakresu do usunięcia zduplikowanych danych ISIN " & ISIN, , GoalName
+                    Goal.Worksheets("ISIN").Columns("A:A").Find(ISIN, LookIn:=xlValues).Offset(0, 6).Value = "Nie odnaleziono zakresu do usunięcia zduplikowanych danych ISIN " & ISIN
+                End If
+            End With
+Goal.Worksheets("ISIN").Columns("A:A").Find(ISIN, LookIn:=xlValues).Offset(0, 6).Value = "Dane zostały skopiowane"
+Nastepny:
+Next
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+
+MsgBox ("Zadana część została przekopiowana")
+
+'Goal.Worksheets("ISIN").Range("F1").Select
+
+End Sub
+
+Sub BloombergMDR()
+
+Dim fnd1 As Variant
+Dim fnd2 As Variant
+
+Columns(1).RemoveDuplicates Columns:=Array(1)
+
+fnd1 = "START-OF-DATA"
+fnd2 = "END-OF-DATA"
+
+Columns("A:A").Find(fnd1, LookIn:=xlValues).Offset(1, 0).Select
+Columns("A:A").Find(fnd2, LookIn:=xlValues).Offset(-1, 0).Select
+
+Range(Columns("A:A").Find(fnd1, LookIn:=xlValues).Offset(1, 0), Columns("A:A").Find(fnd2, LookIn:=xlValues).Offset(-1, 0)).Select
+
+Selection.TextToColumns DataType:=xlDelimited, _
+    TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=True, _
+    Semicolon:=False, Comma:=False, Space:=False, Other:=True, OtherChar _
+    :="|", FieldInfo:=Array(Array(1, 1), Array(2, 1), Array(3, 1), Array(4, 1), Array(5, _
+    1), Array(6, 1), Array(7, 1)), TrailingMinusNumbers:=True
+
+Range("C1").EntireColumn.Insert
+
+Range(Columns("A:A").Find(fnd1, LookIn:=xlValues).Offset(1, 5), Columns("A:A").Find(fnd2, LookIn:=xlValues).Offset(-1, 5)).Select
+Selection.Replace What:=".", Replacement:=".", LookAt:=xlPart
+
+Columns("A:A").Find(fnd1, LookIn:=xlValues).Offset(1, 0).Select
+
+End Sub
+
+
