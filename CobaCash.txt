@@ -1,0 +1,90 @@
+Sub CobaCashRaport()
+'30/11/2020
+
+Dim FR28 As Worksheet
+Dim Pivot As Worksheet
+Dim tbl As Range
+Dim pc As PivotCache
+Dim pt As PivotTable
+
+Application.Workbooks("COBACASH.XLSX").Worksheets(1).Name = "FR28"
+Set FR28 = Application.Workbooks("COBACASH.XLSX").Worksheets("FR28")
+Sheets.Add.Name = "Pivot"
+Set Pivot = Application.Workbooks("COBACASH.XLSX").Worksheets("Pivot")
+
+FR28.Activate
+Set tbl = Range("A1").CurrentRegion
+FR28.ListObjects.Add(SourceType:=xlSrcRange, Source:=tbl).Name = "Data"
+FR28.ListObjects("Data").ListColumns.Add
+
+FR28.Range("Data[[#Headers],[Column1]]").Select
+ActiveCell.FormulaR1C1 = "ICO Netting / COBA Cash Pooling"
+FR28.Range("AF2") = "=+IF(M2=""IG"",""CoBa Cash Pooling"",""ICO Netting"")"
+
+'Set pc = ThisWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:=Range("Data"), Version:=xlPivotTableVersion15)
+'Set pt = Workbook.ActiveSheet.PivotTables.Add(PivotCache:=pc, TableDestination:=Pivot.Range("A1"), TableName:="CobaCash")
+
+Pivot.Activate
+Application.Workbooks("COBACASH.XLSX").PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+    "Data", Version:=6).CreatePivotTable TableDestination:="Pivot!R1C1", _
+    TableName:="CobaCash", DefaultVersion:=6
+
+    With Pivot.PivotTables("CobaCash").PivotFields("Company Code")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With Pivot.PivotTables("CobaCash").PivotFields("Account")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With Pivot.PivotTables("CobaCash").PivotFields("Year/month")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With Pivot.PivotTables("CobaCash").PivotFields( _
+        "ICO Netting / COBA Cash Pooling")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With Pivot.PivotTables("CobaCash").PivotFields("Document Date")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    Pivot.PivotTables("CobaCash").AddDataField Pivot.PivotTables( _
+        "CobaCash").PivotFields("Amount in LC"), "Sum of Amount in LC", xlSum
+    Pivot.PivotTables("CobaCash").PivotFields( _
+        "ICO Netting / COBA Cash Pooling").RepeatLabels = True
+    With Pivot.PivotTables("CobaCash")
+        .InGridDropZones = True
+        .RowAxisLayout xlTabularRow
+    End With
+    Pivot.PivotTables("CobaCash").PivotSelect "", xlDataAndLabel, True
+    Pivot.PivotTables("CobaCash").DataPivotField.PivotItems( _
+        "Sum of Amount in LC").Caption = "Sum of Amount in local currency "
+
+    Columns("A:A").EntireColumn.AutoFit
+    Pivot.PivotTables("CobaCash").PivotSelect "'Row Grand Total'", _
+        xlDataAndLabel, True
+    Selection.NumberFormat = "#,##0.00"
+    Application.CutCopyMode = False
+    Selection.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=0"
+    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    With Selection.FormatConditions(1).Font
+        .Color = -16776961
+        .TintAndShade = 0
+    End With
+    ActiveWorkbook.ShowPivotTableFieldList = False
+
+'With Pivot.PivotTables("CobaCash").TableRange2
+    '.Rows(.Rows.Count).Row
+    '.Select
+'End With
+
+Pivot.Range("C5").Select
+Range(Selection, Selection.End(xlToLeft)).Select
+Range(Selection, Selection.End(xlDown)).Select
+Range(Selection, Selection.End(xlDown)).Select
+Selection.Copy
+
+End Sub
